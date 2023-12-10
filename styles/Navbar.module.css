@@ -1,0 +1,38 @@
+.navbar {
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2em 1.4em;
+}
+
+.logo {
+    font-size: 2.4em;
+    color: var(--text);
+    font-family: 'Afacad', sans-serif;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.link,
+.activelink,
+.logout {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.8em 1.2em;
+    margin: 0 auto 1em;
+    border-radius: 8px;
+    max-width: 240px;
+    width: 100%;
+    color: var(--text-sec);
+}
+
+.activelink {
+    color: var(--white);
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.logout {
+    color: var(--text);
+}

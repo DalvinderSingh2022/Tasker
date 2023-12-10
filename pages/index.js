@@ -10,7 +10,6 @@ const index = () => {
         (localStorage.getItem("todoweb")) ?
             authDispatch({ type: "RETRIEVE" }) :
             router.push("/auth/signin");
-
     }, []);
 
     return (

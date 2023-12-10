@@ -1,0 +1,48 @@
+.main {
+    grid-template-columns: 1fr;
+}
+
+.container {
+    display: grid;
+    height: 100vh;
+    place-items: center;
+    align-content: center;
+}
+
+.box {
+    background-color: var(--white);
+    padding: 2.4em 3.6em;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+    font-size: 1.1em;
+    align-items: center;
+}
+
+.form .group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+    align-self: stretch;
+}
+
+.submit {
+    font-size: 1.1em;
+    border-radius: 8px;
+    padding: 6px 24px;
+    color: var(--white);
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.change {
+    background-color: transparent;
+    padding: 0 8px;
+    text-decoration: underline;
+}
