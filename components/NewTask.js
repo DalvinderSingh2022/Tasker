@@ -4,6 +4,8 @@ import { useContext, useState } from 'react';
 import { db } from '../firebase';
 import { addDoc, collection } from "firebase/firestore";
 
+import { FaRegSave } from "react-icons/fa";
+import { FaXmark } from "react-icons/fa6";
 
 import formclasses from "../styles/auth.module.css";
 import taskclasses from "../styles/task.module.css";
@@ -75,8 +77,8 @@ const NewTask = ({ removeContainer }) => {
                             value={task.duedate || ''}
                             onChange={(e) => handlechange(e)} />
                     </div>
-                    <button type='submit'>save</button>
-                    <button type='button' onClick={() => removeContainer()}>cancel</button>
+                    <button type='submit' className='round'><FaRegSave /></button>
+                    <button type='button' className='round' onClick={() => removeContainer()}><FaXmark /></button>
                 </div>
             </form>
         </div>

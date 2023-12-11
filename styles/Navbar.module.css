@@ -4,12 +4,12 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 2em 1.4em;
+    height: 100vh;
 }
 
 .logo {
-    font-size: 2.4em;
+    font-size: 2.8em;
     color: var(--text);
-    font-family: 'Afacad', sans-serif;
     margin-bottom: 1em;
     text-align: center;
 }
@@ -26,6 +26,7 @@
     max-width: 240px;
     width: 100%;
     color: var(--text-sec);
+    font-size: 1.1em;
 }
 
 .activelink {

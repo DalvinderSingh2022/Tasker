@@ -14,7 +14,7 @@ const Navbar = () => {
     const router = useRouter();
     const { authState, authDispatch } = useContext(authContext);
 
-    if (!authState?.displayName)
+    if (!authState?.isAuthenticated)
         return <></>;
 
     return (

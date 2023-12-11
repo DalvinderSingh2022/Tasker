@@ -47,3 +47,11 @@ button.change {
     text-decoration: underline;
     font-size: .9em;
 }
+
+.form :where(input:not(:disabled), textarea, select) {
+    border-bottom-color: var(--primary);
+}
+
+.form :where(input:not(:disabled), textarea, select):focus {
+    border-bottom-color: var(--secondary);
+}

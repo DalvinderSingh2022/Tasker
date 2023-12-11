@@ -8,10 +8,5 @@
 .header button {
     width: 45px;
     height: 45px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    color: var(--text);
-    border-radius: 40px;
-    font-size: 1em;
-    display: grid;
-    place-items: center;
+    font-size: 1.1em;
 }

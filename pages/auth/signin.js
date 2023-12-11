@@ -2,13 +2,13 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { authContext } from "@/store/auth";
 
 import cssClasses from "../../styles/auth.module.css";
 
 const login = () => {
-    const { authDispatch } = useContext(authContext);
+    const { authDispatch, authState } = useContext(authContext);
     const router = useRouter();
     const [user, setUser] = useState({
         displayName: null,
@@ -16,6 +16,11 @@ const login = () => {
         password: null,
         uid: null,
     });
+
+
+    if (authState?.isAuthenticated) {
+        router.push("/");
+    }
 
     const handlechange = (e) => {
         const name = e.target.name;

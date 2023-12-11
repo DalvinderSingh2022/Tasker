@@ -1,0 +1,41 @@
+.container {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.container .task {
+    background-color: var(--white);
+    padding-top: .5em;
+    border-radius: 20px;
+}
+
+.task :where(input, textarea, p) {
+    background-color: transparent;
+    border: none;
+    color: var(--text-sec);
+    text-transform: capitalize;
+    padding: 4px 16px;
+}
+
+.task input {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.task form {
+    gap: 0;
+    position: relative;
+}
+
+.task form button {
+    position: absolute;
+    right: 8px;
+    top: 0;
+}
+
+.task p {
+    font-family: sans-serif;
+    font-size: .8em;
+    padding: 8px 16px;
+}

@@ -8,12 +8,16 @@ import { authContext } from "@/store/auth";
 import cssClasses from "../../styles/auth.module.css";
 
 const login = () => {
-    const { authDispatch } = useContext(authContext);
+    const { authDispatch, authState } = useContext(authContext);
     const router = useRouter();
     const [user, setUser] = useState({
         email: null,
         password: null
     });
+
+    if (authState?.isAuthenticated) {
+        router.push("/");
+    }
 
     const handlechange = (e) => {
         const name = e.target.name;

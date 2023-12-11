@@ -22,11 +22,4 @@ export function authReducer(state, action) {
         localStorage.removeItem("todoweb");
         return { ...initialAuthState }
     }
-    if (action.type === "RETRIEVE") {
-        const user = JSON.parse(localStorage.getItem("todoweb"));
-        return {
-            isAuthenticated: true,
-            ...user
-        }
-    }
 }
