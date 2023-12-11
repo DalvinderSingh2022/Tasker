@@ -7,7 +7,7 @@ import { authContext } from "@/store/auth";
 
 import cssClasses from "../../styles/auth.module.css";
 
-const login = ({ }) => {
+const login = () => {
     const { authDispatch } = useContext(authContext);
     const router = useRouter();
     const [user, setUser] = useState({

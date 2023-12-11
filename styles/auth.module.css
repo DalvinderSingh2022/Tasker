@@ -4,7 +4,7 @@
 
 .container {
     display: grid;
-    height: 100vh;
+    height: 100%;
     place-items: center;
     align-content: center;
 }
@@ -33,16 +33,17 @@
     align-self: stretch;
 }
 
-.submit {
+.form button {
     font-size: 1.1em;
-    border-radius: 8px;
-    padding: 6px 24px;
+    border-radius: 40px;
+    padding: 10px 24px;
     color: var(--white);
     background: linear-gradient(90deg, var(--primary), var(--secondary));
 }
 
-.change {
-    background-color: transparent;
+button.change {
+    background: transparent;
     padding: 0 8px;
     text-decoration: underline;
+    font-size: .9em;
 }

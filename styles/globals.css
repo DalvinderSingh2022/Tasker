@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Afacad:wght@500&family=Oswald:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Afacad:wght@500&display=swap');
 
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Oswald', sans-serif;
+    font-family: sans-serif;
     box-sizing: border-box;
 }
 
@@ -12,7 +12,7 @@
     --primary: #dec3fc;
 
     --white: #fbfbfb;
-    --grey: #E4E4E4;
+    --grey: #f4f4f4;
 
     --text: #302f35;
     --text-sec: #8a8e96;
@@ -31,6 +31,10 @@ main {
     grid-template-columns: 3fr 9fr;
 }
 
+article {
+    padding: 2.4em 3.2em;
+}
+
 button {
     border: none;
     cursor: pointer;
@@ -46,14 +50,20 @@ form label {
 }
 
 form :where(input, textarea, select) {
-    border: none;
-    border-bottom: 2px solid var(--primary);
-    padding: 4px 8px;
+    border: 1px solid transparent;
+    border-bottom-color: (--primary);
+    padding: 10px 16px;
     outline: none;
     resize: none;
     font-size: 0.9em;
+    background-color: var(--grey);
+    border-radius: 24px;
+}
+
+form textarea {
+    border-radius: 16px;
 }
 
 form :where(input:not(:disabled), textarea, select):focus {
-    border-color: var(--secondary);
+    border-bottom-color: var(--secondary);
 }
