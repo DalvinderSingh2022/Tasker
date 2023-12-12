@@ -32,17 +32,21 @@ const NewTask = ({ removeContainer }) => {
 
     const handlesubmit = async (e) => {
         e.preventDefault();
-        await addDoc(collection(db, (authState.uid).toString()), { ...task })
-            .then(() => {
-                tasksDispatch({
-                    type: "ADDTASK",
-                    payload: { task }
+        if (!task.title || !task.detail || !task.duedate) {
+
+        } else {
+            await addDoc(collection(db, (authState.uid).toString()), { ...task })
+                .then(() => {
+                    tasksDispatch({
+                        type: "ADDTASK",
+                        payload: { task }
+                    });
+                    removeContainer();
+                })
+                .catch(error => {
+                    console.error(error);
                 });
-                removeContainer();
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        }
     }
 
     return (

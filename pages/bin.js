@@ -11,6 +11,7 @@ import { LiaTrashRestoreSolid } from "react-icons/lia";
 import { MdDeleteSweep } from "react-icons/md";
 
 import tasksclasses from "../styles/tasks.module.css";
+import Loading from "@/components/Loading";
 
 const bin = () => {
     const { authState } = useContext(authContext);
@@ -61,9 +62,9 @@ const bin = () => {
                 <button onClick={hanleEmptyBIn}><MdDeleteSweep />Empty Bin</button>
             </section>
             <div className={tasksclasses.container}>
-                {tasks && tasks.map(task => (
-                    <Task {...task} key={task.assignTime + task.title} />
-                ))}
+                {tasks?.length ? tasks.map(task => {
+                    <Task {...task} key={task.uid || task.assignTime} />
+                }) : (tasks ? < Loading /> : <div>There is no task</div>)}
             </div>
         </>
     )

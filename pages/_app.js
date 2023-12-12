@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar';
 import { useRouter } from 'next/router';
 import { authContext, authReducer, initialAuthState } from '@/store/auth';
 import { tasksContext, tasksReducer, initialTasksState } from '@/store/tasks';
+import Loading from "@/components/Loading";
 
 import cssClasses from "../styles/auth.module.css";
 import "../styles/globals.css";
@@ -47,6 +48,12 @@ function MyApp({ Component, pageProps }) {
             database();
         }
     }, [authState, tasksState]);
+
+    useEffect(() => {
+        if (localStorage.getItem("todoweb") && !authState) {
+            return <Loading full={true} />
+        }
+    })
 
     return (
         <tasksContext.Provider value={{ tasksState, tasksDispatch }}>

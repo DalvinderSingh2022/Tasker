@@ -6,6 +6,7 @@ import Task from "@/components/Task";
 import { tasksContext } from "@/store/tasks";
 
 import tasksclasses from "../styles/tasks.module.css";
+import Loading from "@/components/Loading";
 
 const tasks = () => {
     const { tasksState } = useContext(tasksContext);
@@ -31,9 +32,9 @@ const tasks = () => {
                 </button>
             </section>
             <div className={tasksclasses.container}>
-                {tasks && tasks.map(task => (
-                    <Task {...task} key={task.assignTime + task.title} />
-                ))}
+                {tasks?.length ? tasks.map(task => {
+                    <Task {...task} key={task.uid || task.assignTime} />
+                }) : (tasks ? <Loading /> : <div>There is no task</div>)}
             </div>
         </>
     )
