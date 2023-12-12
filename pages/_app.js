@@ -32,18 +32,16 @@ function MyApp({ Component, pageProps }) {
     useEffect(() => {
         async function database() {
             const querySnapshot = await getDocs(collection(db, authState.uid));
-            if (querySnapshot.size !== tasksState.length) {
-                querySnapshot.forEach((task) => {
-                    tasksDispatch({
-                        type: "ADDTASK",
-                        payload: {
-                            task: task.data(),
-                            uid: task.id,
-                            status: (new Date(task.data().duedate).getTime() < new Date().getTime()) ? "delay" : task.data().status
-                        }
-                    });
+            querySnapshot.forEach((task) => {
+                tasksDispatch({
+                    type: querySnapshot.size !== tasksState.length ? "ADDTASK" : "UPDATETASK",
+                    payload: {
+                        task: task.data(),
+                        uid: task.id,
+                        status: (new Date(task.data().duedate).getTime() < new Date().getTime()) ? "delay" : task.data().status
+                    }
                 });
-            }
+            });
         }
         if (authState.uid) {
             database();
