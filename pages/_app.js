@@ -8,8 +8,6 @@ import { useRouter } from 'next/router';
 import { authContext, authReducer, initialAuthState } from '@/store/auth';
 import { tasksContext, tasksReducer, initialTasksState } from '@/store/tasks';
 
-import { MdOutlineMenuOpen } from "react-icons/md";
-
 import cssClasses from "../styles/auth.module.css";
 import "../styles/globals.css";
 
@@ -36,9 +34,11 @@ function MyApp({ Component, pageProps }) {
                 tasksDispatch({
                     type: querySnapshot.size !== tasksState.length ? "ADDTASK" : "UPDATETASK",
                     payload: {
-                        task: task.data(),
-                        uid: task.id,
-                        status: (new Date(task.data().duedate).getTime() < new Date().getTime()) ? "delay" : task.data().status
+                        task: {
+                            ...task.data(),
+                            uid: task.id,
+                            status: (new Date(task.data().duedate).getTime() < new Date().getTime()) ? "delay" : task.data().status
+                        }
                     }
                 });
             });
@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps }) {
         if (authState.uid) {
             database();
         }
-    }, [authState, tasksState])
+    }, [authState, tasksState]);
 
     return (
         <tasksContext.Provider value={{ tasksState, tasksDispatch }}>
