@@ -9,6 +9,7 @@
     padding-top: .5em;
     border-radius: 20px;
     max-width: 520px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .task :where(input, textarea, p) {

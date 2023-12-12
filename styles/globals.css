@@ -5,6 +5,7 @@
     padding: 0;
     font-family: 'Afacad', sans-serif;
     box-sizing: border-box;
+    transition: .2s ease;
 }
 
 :root {
@@ -71,6 +72,10 @@ button {
     border: none;
     cursor: pointer;
     padding: 4px 8px;
+}
+
+button:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
 }
 
 a {
@@ -160,6 +165,53 @@ button.red {
 
 button.menu {
     display: none;
+}
+
+.loading svg {
+    animation: rotate 1.5s infinite linear;
+}
+
+.loading circle {
+    fill: none;
+    stroke-linecap: round;
+    stroke-dasharray: 320;
+    animation: spin 3s infinite ease-in-out;
+}
+
+@keyframes spin {
+    0% {
+        stroke-dashoffset: 640;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.full.loading {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: var(--background);
+    z-index: 999;
+}
+
+.loading {
+    display: grid;
+    place-items: center;
+    align-items: center;
 }
 
 @media screen and (max-width:1080px) {
