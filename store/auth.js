@@ -12,7 +12,7 @@ export const initialAuthState = {
 
 export function authReducer(state, action) {
     if (action.type === "LOGIN") {
-        localStorage.setItem("todoweb", JSON.stringify({ ...action.payload }));
+        localStorage.setItem("todoweb", JSON.stringify({ ...action.payload.user }));
         return {
             isAuthenticated: true,
             ...action.payload.user
