@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Tasker
+Tasker is a simple yet powerful todo application that helps you organize and prioritize your to-do efficiently.
+[live demo](https://todoappds.netlify.app/)
+
+
+## Features
+- Create, edit, and delete tasks
+- Set due dates for tasks
+- Organize tasks into categories(status)
+- Mark tasks as completed
+- Moved tasks to Recycle Bin
+- Search tasks
+- User-friendly and intuitive interface
+
+## Usage
+1. Create an account or log in if you already have one.
+2. Add tasks by using the "+ add" section on the dashboard.
+3. Edit or delete tasks by clicking the task.
+4. Use search functionality to find specific tasks.
+5. Mark tasks as completed when you finish them.
+7. Your all data is saved using [firebase](www.firebase.com).
 
 ## Getting Started
+These instructions will help you get a copy of the project up and running on your local machine for development and testing purposes.
 
-First, run the development server:
+### Dashboard
+- Users will be able to create new tasks with a title, detail, and due date.
+- Users will be able to update and delete tasks.
+- Users can also have an eye on its tasks in numbers.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+  
+### Tasks page
+- The tasks page will give users the power to view the tasks.
+- The task card displays the title, detail and some tags as the status of tasks and several comments.
+- The user can bin or mark complete tasks.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### login/register
+- register using email, and password give yourself a name.
+- Users can log in easily using email and password.
+- Users can log out at any time by clicking the button at the sidebar.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Installing
+1. Clone the repository to your local machine:
+- ```git clone https://github.com/DalvinderSingh2022/Todo-App.git```
+  
+2. Navigate to the project directory:
+- ``` cd Todo-App```
+  
+3. Install the dependencies:
+- ```npm install```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+4. Start the development server:
+- ```npm start```
+  
+5. Open your web browser and go to ```http://localhost:3000``` to access the application.
