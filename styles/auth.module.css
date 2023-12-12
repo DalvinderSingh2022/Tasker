@@ -2,13 +2,6 @@
     grid-template-columns: 1fr;
 }
 
-.container {
-    display: grid;
-    height: 100%;
-    place-items: center;
-    align-content: center;
-}
-
 .box {
     background-color: var(--white);
     padding: 2.4em 3.6em;
@@ -16,6 +9,7 @@
     display: flex;
     flex-direction: column;
     gap: 3em;
+    width: min(100vw, 540px);
 }
 
 .form {

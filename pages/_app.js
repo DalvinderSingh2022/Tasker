@@ -1,16 +1,15 @@
-import { authContext, authReducer, initialAuthState } from '@/store/auth';
-import { tasksContext, tasksReducer, initialTasksState } from '@/store/tasks';
-import { useEffect, useReducer } from 'react';
-
-
 import { db } from "@/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
-import cssClasses from "../styles/auth.module.css";
-import "../styles/globals.css";
+import { useEffect, useReducer } from 'react';
 
 import Navbar from '@/components/Navbar';
 import { useRouter } from 'next/router';
+import { authContext, authReducer, initialAuthState } from '@/store/auth';
+import { tasksContext, tasksReducer, initialTasksState } from '@/store/tasks';
+
+import cssClasses from "../styles/auth.module.css";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
     const router = useRouter();
@@ -19,30 +18,32 @@ function MyApp({ Component, pageProps }) {
 
     useEffect(() => {
         if (localStorage.getItem("todoweb") && !authState.uid) {
-            console.log("loading user")
             authDispatch({
                 type: "LOGIN",
-                payload: JSON.parse(localStorage.getItem("todoweb"))
+                payload: {
+                    user: JSON.parse(localStorage.getItem("todoweb"))
+                }
             })
         }
-    }, []);
+    }, [authState]);
 
     useEffect(() => {
         async function database() {
             const querySnapshot = await getDocs(collection(db, authState.uid));
             if (querySnapshot.size !== tasksState.length) {
                 querySnapshot.forEach((task) => {
-                    if (task.data().section === "task") {
-                        tasksDispatch({
-                            type: "ADDTASK",
-                            payload: { task: task.data(), uid: task.id }
-                        });
-                    }
+                    tasksDispatch({
+                        type: "ADDTASK",
+                        payload: {
+                            task: task.data(),
+                            uid: task.id,
+                            status: (new Date(task.data().duedate).getTime() < new Date().getTime()) ? "delay" : task.data().status
+                        }
+                    });
                 });
             }
         }
         if (authState.uid) {
-            console.log("loading tasks")
             database();
         }
     }, [authState])

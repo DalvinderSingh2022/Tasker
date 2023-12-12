@@ -5,17 +5,17 @@ import { tasksContext } from "@/store/tasks";
 
 import tasksclasses from "../styles/tasks.module.css";
 
-const tasks = () => {
+const bin = () => {
     const { tasksState } = useContext(tasksContext);
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        setTasks(tasksState.filter(task => !task.isBinned));
+        setTasks(tasksState.filter(task => task.isBinned));
     }, [tasksState])
 
     return (
         <>
-            <h1>Tasks</h1>
+            <h1>Recycle Bin</h1>
             <div className={tasksclasses.container}>
                 {tasks && tasks.map(task => (
                     <Task {...task} key={task.assignTime + task.title} />
@@ -25,4 +25,4 @@ const tasks = () => {
     )
 }
 
-export default tasks;
+export default bin;

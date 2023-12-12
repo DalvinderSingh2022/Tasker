@@ -18,6 +18,10 @@
     --text-sec: #8a8e96;
 
     --background: #f0ebf7;
+
+    --blue-grad: linear-gradient(90deg, rgb(55 172 255), rgb(95, 211, 237));
+    --red-grad: linear-gradient(90deg, rgb(232, 93, 65), rgb(241, 130, 105));
+    --green-grad: linear-gradient(90deg, rgb(22, 189, 75), rgb(64, 199, 120));
 }
 
 body {
@@ -66,7 +70,7 @@ textarea {
 }
 
 button.round {
-    padding: 0 !important;
+    padding: 0;
     width: 40px;
     height: 40px;
     background: linear-gradient(90deg, var(--primary), var(--secondary));
@@ -74,6 +78,14 @@ button.round {
     border-radius: 40px;
     display: grid;
     place-items: center;
+}
+
+button.round.long {
+    padding: 0 12px;
+    display: flex;
+    width: auto;
+    gap: 6px;
+    text-transform: capitalize;
 }
 
 h1 {
@@ -84,4 +96,39 @@ h1 {
 h2 {
     font-size: 1.8em;
     margin: .8em 0;
+}
+
+.globalBox {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    place-items: center;
+    align-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.15);
+    z-index: 99;
+}
+
+.status {
+    padding: 0 6px;
+    border-radius: 20px;
+    color: var(--white);
+    margin-bottom: 8px;
+}
+
+.todo,
+button.blue {
+    background: var(--blue-grad);
+}
+
+.complete,
+button.green {
+    background: var(--green-grad);
+}
+
+.delay,
+button.red {
+    background: var(--red-grad);
 }

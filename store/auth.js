@@ -15,7 +15,7 @@ export function authReducer(state, action) {
         localStorage.setItem("todoweb", JSON.stringify({ ...action.payload }));
         return {
             isAuthenticated: true,
-            ...action.payload
+            ...action.payload.user
         }
     }
     if (action.type === "LOGOUT") {

@@ -1,13 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
+
 import { FaPlus } from "react-icons/fa";
-import cssClasses from "../styles/dashboard.module.css";
+
 import NewTask from "@/components/NewTask";
 import { authContext } from "@/store/auth";
 import { tasksContext } from "@/store/tasks";
 import Task from "@/components/Task";
 
 import tasksclasses from "../styles/tasks.module.css";
+import cssClasses from "../styles/dashboard.module.css";
+
 const index = () => {
     const router = useRouter();
     const [newTask, setNewTask] = useState(false);
@@ -27,7 +30,7 @@ const index = () => {
         }];
 
     useEffect(() => {
-        tasksState.forEach(task => {
+        tasksState.filter(task => !task.isBinned).forEach(task => {
             const date = (new Date(task.duedate)).getDate();
             const month = (new Date(task.duedate)).getMonth();
             const year = (new Date(task.duedate)).getFullYear();
@@ -43,11 +46,13 @@ const index = () => {
             }
         });
         setUpdatetasks(sections);
-    }, [tasksState])
+    }, [tasksState]);
 
-    if (!authState?.isAuthenticated) {
-        router.push("/auth/signin");
-    }
+    useEffect(() => {
+        if (!authState?.isAuthenticated) {
+            router.push("/auth/signin");
+        }
+    })
 
     return (
         <>
@@ -55,7 +60,7 @@ const index = () => {
                 <div>
                     hello, {authState?.displayName}
                 </div>
-                <button onClick={() => setNewTask(prev => !prev)} className="round"><FaPlus /></button>
+                <button onClick={() => setNewTask(prev => !prev)} className="round long"><FaPlus />Add</button>
             </header>
             {updateTasks && updateTasks.map((section) => (
                 <div key={section.header}>

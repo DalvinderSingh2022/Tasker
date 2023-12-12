@@ -1,12 +1,13 @@
-import { authContext } from "@/store/auth";
-import Link from "next/link";
 import { useContext } from "react";
+import Link from "next/link";
 
 import { MdDashboard } from "react-icons/md";
 import { FaTasks } from "react-icons/fa";
 import { FaRecycle } from "react-icons/fa6";
 import { MdLogout } from "react-icons/md";
 import { useRouter } from "next/router";
+
+import { authContext } from "@/store/auth";
 
 import cssClasses from "../styles/Navbar.module.css";
 

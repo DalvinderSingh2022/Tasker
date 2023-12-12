@@ -1,13 +1,14 @@
 .container {
     display: grid;
     gap: 1em;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
 
 .container .task {
     background-color: var(--white);
     padding-top: .5em;
     border-radius: 20px;
+    max-width: 520px;
 }
 
 .task :where(input, textarea, p) {
@@ -35,7 +36,7 @@
 }
 
 .task p {
-    font-family: sans-serif;
-    font-size: .8em;
-    padding: 8px 16px;
+    font-size: .9em;
+    padding: 0 0 0 12px;
+    margin-bottom: 8px;
 }

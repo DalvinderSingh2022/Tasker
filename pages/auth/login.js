@@ -1,11 +1,13 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
+
 import { authContext } from "@/store/auth";
 
-import cssClasses from "../../styles/auth.module.css";
+import authClasses from "../../styles/auth.module.css";
 
 const login = () => {
     const { authDispatch, authState } = useContext(authContext);
@@ -32,10 +34,12 @@ const login = () => {
                 authDispatch({
                     type: "LOGIN",
                     payload: {
-                        displayName: userInfo.user.displayName,
-                        email: userInfo.user.email,
-                        password: user.password,
-                        uid: userInfo.user.uid,
+                        user: {
+                            displayName: userInfo.user.displayName,
+                            email: userInfo.user.email,
+                            password: user.password,
+                            uid: userInfo.user.uid,
+                        }
                     }
                 });
                 router.push('/');
@@ -44,14 +48,14 @@ const login = () => {
             });
     }
     return (
-        <div className={cssClasses.container}>
-            <div className={cssClasses.box}>
+        <div className="globalBox">
+            <div className={authClasses.box}>
                 <div>
                     <h1>Welcome back</h1>
                     <p>Welcome back! Please enter your details.</p>
                 </div>
-                <form className={cssClasses.form} onSubmit={(e) => handlesubmit(e)}>
-                    <div className={cssClasses.group} >
+                <form className={authClasses.form} onSubmit={(e) => handlesubmit(e)}>
+                    <div className={authClasses.group} >
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"
@@ -61,7 +65,7 @@ const login = () => {
                             value={user.email || ''}
                             onChange={(e) => handlechange(e)} />
                     </div>
-                    <div className={cssClasses.group} >
+                    <div className={authClasses.group} >
                         <label htmlFor="password">Password</label>
                         <input
                             type="password"
@@ -73,12 +77,12 @@ const login = () => {
                     </div>
 
                     <div>
-                        <button type='submit' className={cssClasses.submit}>Log In</button>
+                        <button type='submit' className={authClasses.submit}>Log In</button>
                     </div>
 
                     <div>
                         Don’t have an account?
-                        <button type='button' className={cssClasses.change}><Link href='/auth/signin'>Sign In</Link></button>
+                        <button type='button' className={authClasses.change}><Link href='/auth/signin'>Sign In</Link></button>
                     </div>
                 </form>
             </div>
