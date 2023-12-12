@@ -34,10 +34,11 @@ main {
     width: 100vw;
     grid-template-columns: 3fr 9fr;
     overflow: hidden;
+    position: relative;
 }
 
 article {
-    padding: 2.4em 3.2em;
+    padding: 2em 3.2em;
     overflow: auto;
 }
 
@@ -131,4 +132,47 @@ button.green {
 .delay,
 button.red {
     background: var(--red-grad);
+}
+
+button.menu {
+    display: none;
+}
+
+@media screen and (max-width:1080px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    article {
+        padding: 2em 1em;
+    }
+
+    nav {
+        padding: 2em 0;
+        width: 100vw;
+        left: -100%;
+        position: fixed;
+        z-index: 999;
+    }
+
+    header {
+        padding-right: 65px;
+    }
+
+    button.menu {
+        display: block;
+        font-size: 1.4em;
+        position: absolute;
+        right: calc(1em - 100%);
+        height: 45px;
+        width: 45px;
+    }
+
+    .open button.menu {
+        right: 1em;
+    }
+
+    nav.open {
+        left: 0;
+    }
 }

@@ -8,6 +8,8 @@ import { useRouter } from 'next/router';
 import { authContext, authReducer, initialAuthState } from '@/store/auth';
 import { tasksContext, tasksReducer, initialTasksState } from '@/store/tasks';
 
+import { MdOutlineMenuOpen } from "react-icons/md";
+
 import cssClasses from "../styles/auth.module.css";
 import "../styles/globals.css";
 
@@ -46,7 +48,7 @@ function MyApp({ Component, pageProps }) {
         if (authState.uid) {
             database();
         }
-    }, [authState])
+    }, [authState, tasksState])
 
     return (
         <tasksContext.Provider value={{ tasksState, tasksDispatch }}>
