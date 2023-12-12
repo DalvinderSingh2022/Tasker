@@ -8,7 +8,6 @@ import authclasses from "../styles/auth.module.css";
 import tasksclasses from "../styles/tasks.module.css";
 import taskclasses from "../styles/task.module.css";
 
-
 const Task = (task) => {
     const { title, detail, duedate, status } = task;
     const [editTask, setEditTask] = useState(false);

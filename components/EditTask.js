@@ -14,11 +14,13 @@ import { tasksContext } from "@/store/tasks";
 
 import authclasses from "../styles/auth.module.css";
 import taskclasses from "../styles/task.module.css";
+import Alert from "./Alert";
 
 const EditTask = ({ proptask, removeContainer }) => {
     const { authState } = useContext(authContext);
     const { tasksDispatch } = useContext(tasksContext);
     const [task, setTask] = useState({ ...proptask });
+    const [alert, setAlert] = useState(null);
 
     const handlechange = (e) => {
         const name = e.target.name;
@@ -37,6 +39,7 @@ const EditTask = ({ proptask, removeContainer }) => {
             })
             .catch(error => {
                 console.error(error);
+                setAlert({ message: error.message, type: 'red' });
             });
     }
 
@@ -48,72 +51,94 @@ const EditTask = ({ proptask, removeContainer }) => {
                     payload: { task }
                 });
                 removeContainer();
+                setAlert({ message: "Task  deleted successfully", type: 'yellow' });
             })
             .catch(error => {
                 console.error(error);
+                setAlert({ message: error.message, type: 'red' });
             });
     }
 
     return (
-        <div className="globalBox">
-            <div className={taskclasses.container}>
-                <div className={authclasses.form}>
-                    <div className={authclasses.group} >
-                        <label htmlFor="title">Title</label>
-                        <input
-                            disabled={task.isBinned}
-                            type="text"
-                            id='title'
-                            name='title'
-                            placeholder='Enter title'
-                            value={task.title || ''}
-                            onChange={(e) => handlechange(e)} />
-                    </div>
-                    <div className={authclasses.group} >
-                        <label htmlFor="detail">Details</label>
-                        <textarea
-                            disabled={task.isBinned}
-                            cols={5}
-                            rows={5}
-                            id='detail'
-                            name='detail'
-                            placeholder='Enter detail'
-                            value={task.detail || ''}
-                            onChange={(e) => handlechange(e)} />
-                    </div>
-                    <div className={taskclasses.group} >
-                        <div className={authclasses.group}>
-                            <label htmlFor="duedate">Duedate</label>
+        <>
+            <div className="globalBox">
+                <div className={taskclasses.container}>
+                    <div className={authclasses.form}>
+                        <div className={authclasses.group} >
+                            <label htmlFor="title">Title</label>
                             <input
                                 disabled={task.isBinned}
-                                type='date'
-                                id='duedate'
-                                name='duedate'
-                                placeholder='Enter duedate'
-                                value={task.duedate || ''}
+                                type="text"
+                                id='title'
+                                name='title'
+                                placeholder='Enter title'
+                                value={task.title || ''}
                                 onChange={(e) => handlechange(e)} />
                         </div>
+                        <div className={authclasses.group} >
+                            <label htmlFor="detail">Details</label>
+                            <textarea
+                                disabled={task.isBinned}
+                                cols={5}
+                                rows={5}
+                                id='detail'
+                                name='detail'
+                                placeholder='Enter detail'
+                                value={task.detail || ''}
+                                onChange={(e) => handlechange(e)} />
+                        </div>
+                        <div className={taskclasses.group} >
+                            <div className={authclasses.group}>
+                                <label htmlFor="duedate">Duedate</label>
+                                <input
+                                    disabled={task.isBinned}
+                                    type='date'
+                                    id='duedate'
+                                    name='duedate'
+                                    placeholder='Enter duedate'
+                                    value={task.duedate || ''}
+                                    onChange={(e) => handlechange(e)} />
+                            </div>
 
-                        {!task.isBinned ?
-                            <>
-                                <button className='round long blue' onClick={() => handler("UPDATETASK", { ...task })}><FaRegSave />save</button>
-                                {task.status !== "complete"
-                                    ? <button className='round long green' onClick={() => handler("UPDATETASK", { ...task, status: "complete" })}><FaRegCheckCircle />check</button>
-                                    : <button className='round long blue' onClick={() => handler("UPDATETASK", { ...task, status: "todo" })}><ImRadioUnchecked />uncheck</button>
-                                }
-                                <button className='round long red' onClick={() => handler("UPDATETASK", { ...task, isBinned: true })}><MdDeleteOutline />bin</button>
-                            </> :
-                            <>
-                                <button className='round long blue' onClick={() => handler("UPDATETASK", { ...task, isBinned: false })}><FaRegSave />restore</button>
-                                <button className='round long red' onClick={handleDelete}><FaRegSave />delete</button>
-                            </>
-                        }
+                            {!task.isBinned ?
+                                <>
+                                    <button className='round long blue' onClick={() => {
+                                        handler("UPDATETASK", { ...task });
+                                        setAlert({ message: "Task changes saved successfully", type: 'blue' });
+                                    }}><FaRegSave />save</button>
 
-                        <button className='round long red' onClick={() => removeContainer()}><FaXmark />close</button>
+                                    {task.status !== "complete"
+                                        ? <button className='round long green' onClick={() => {
+                                            handler("UPDATETASK", { ...task, status: "complete" });
+                                            setAlert({ message: "Task marked completed", type: 'blue' });
+                                        }}><FaRegCheckCircle />check</button>
+
+                                        : <button className='round long blue' onClick={() => {
+                                            handler("UPDATETASK", { ...task, status: "todo" });
+                                            setAlert({ message: "Task marked incomplete", type: 'yellow' });
+                                        }}><ImRadioUnchecked />uncheck</button>
+                                    }
+                                    <button className='round long red' onClick={() => {
+                                        handler("UPDATETASK", { ...task, isBinned: true });
+                                        setAlert({ message: "Task  moved to recycle bin", type: 'yellow' });
+                                    }}><MdDeleteOutline />bin</button>
+                                </> :
+                                <>
+                                    <button className='round long blue' onClick={() => {
+                                        handler("UPDATETASK", { ...task, isBinned: false });
+                                        setAlert({ message: "Task removed from recycle bin", type: 'blue' });
+                                    }}><FaRegSave />restore</button>
+                                    <button className='round long red' onClick={handleDelete}><FaRegSave />delete</button>
+                                </>
+                            }
+
+                            <button className='round long red' onClick={() => removeContainer()}><FaXmark />close</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            {alert && <Alert {...alert} setAlert={setAlert} />}
+        </>
     )
 }
 
