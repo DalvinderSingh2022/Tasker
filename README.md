@@ -1,4 +1,4 @@
-# Tasker
+# Todo-App
 Tasker is a simple yet powerful todo application that helps you organize and prioritize your to-do efficiently.
 [live demo](https://todoappds.netlify.app/)
 
