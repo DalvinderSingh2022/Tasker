@@ -19,7 +19,6 @@ function MyApp({ Component, pageProps }) {
     const [taskToUpdate, setTaskToUpdate] = useState(null)
 
     useEffect(() => {
-        console.log("db")
         if (localStorage.getItem("todoweb") && !authState.uid) {
             authDispatch({
                 type: "LOGIN",
@@ -53,7 +52,6 @@ function MyApp({ Component, pageProps }) {
 
     useEffect(() => {
         setTaskToUpdate(tasksState.filter(task => task.toUpdate));
-        console.log(taskToUpdate)
     }, [tasksState]);
 
     useEffect(() => {
@@ -74,7 +72,6 @@ function MyApp({ Component, pageProps }) {
                     console.error(error);
                 })
         }
-        console.log(taskToUpdate)
         if (taskToUpdate?.length > 0) {
             database();
         }

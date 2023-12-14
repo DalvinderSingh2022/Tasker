@@ -45,7 +45,7 @@ const signin = () => {
                         type: "LOGIN",
                         payload: {
                             user: {
-                                displayName: userInfo.user.displayName,
+                                displayName: userInfo.user.displayName || user.displayName,
                                 email: userInfo.user.email,
                                 password: user.password,
                                 uid: userInfo.user.uid,
