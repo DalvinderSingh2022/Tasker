@@ -29,11 +29,16 @@ const EditTask = ({ proptask, removeContainer }) => {
     }
 
     const handler = async (dispatchType, params) => {
-        await setDoc(doc(collection(db, authState.uid), params.uid || task.assignTime), { ...params })
+        await setDoc(doc(collection(db, authState.uid), params.uid || params.assignTime), { ...params })
             .then(() => {
                 tasksDispatch({
                     type: dispatchType,
-                    payload: { task }
+                    payload: {
+                        task: {
+                            ...task,
+                            toUpdate: true
+                        }
+                    }
                 });
                 removeContainer();
             })
@@ -48,7 +53,12 @@ const EditTask = ({ proptask, removeContainer }) => {
             .then(() => {
                 tasksDispatch({
                     type: "DELETETASK",
-                    payload: { task }
+                    payload: {
+                        task: {
+                            ...task,
+                            toUpdate: true
+                        }
+                    }
                 });
                 removeContainer();
                 setAlert({ message: "Task  deleted successfully", type: 'yellow' });

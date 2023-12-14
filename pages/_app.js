@@ -1,8 +1,8 @@
+import { collection, getDocs, doc, setDoc } from "firebase/firestore";
+
+import { useEffect, useReducer, useState } from 'react';
+
 import { db } from "@/firebase";
-import { collection, getDocs } from "firebase/firestore";
-
-import { useEffect, useReducer } from 'react';
-
 import Navbar from '@/components/Navbar';
 import { useRouter } from 'next/router';
 import { authContext, authReducer, initialAuthState } from '@/store/auth';
@@ -16,8 +16,10 @@ function MyApp({ Component, pageProps }) {
     const router = useRouter();
     const [authState, authDispatch] = useReducer(authReducer, initialAuthState);
     const [tasksState, tasksDispatch] = useReducer(tasksReducer, initialTasksState);
+    const [taskToUpdate, setTaskToUpdate] = useState(null)
 
     useEffect(() => {
+        console.log("db")
         if (localStorage.getItem("todoweb") && !authState.uid) {
             authDispatch({
                 type: "LOGIN",
@@ -26,28 +28,57 @@ function MyApp({ Component, pageProps }) {
                 }
             })
         }
-    }, [authState]);
-
-    useEffect(() => {
         async function database() {
             const querySnapshot = await getDocs(collection(db, authState.uid));
-            querySnapshot.forEach((task) => {
-                tasksDispatch({
-                    type: querySnapshot.size !== tasksState.length ? "ADDTASK" : "UPDATETASK",
-                    payload: {
-                        task: {
-                            ...task.data(),
-                            uid: task.id,
-                            status: (new Date(task.data().duedate).getTime() < new Date().getTime()) ? "delay" : task.data().status
+            if (querySnapshot.size !== tasksState.length) {
+                querySnapshot.forEach((task) => {
+                    const taskData = task.data();
+                    tasksDispatch({
+                        type: "ADDTASK",
+                        payload: {
+                            task: {
+                                ...taskData,
+                                uid: taskData.id,
+                                status: (new Date(taskData.duedate).getTime() < new Date().getTime()) ? "delay" : taskData.status
+                            }
                         }
-                    }
+                    });
                 });
-            });
+            }
         }
         if (authState.uid) {
             database();
         }
-    }, [authState, tasksState]);
+    }, [authState]);
+
+    useEffect(() => {
+        setTaskToUpdate(tasksState.filter(task => task.toUpdate));
+        console.log(taskToUpdate)
+    }, [tasksState]);
+
+    useEffect(() => {
+        async function database() {
+            await setDoc(doc(collection(db, authState.uid), taskToUpdate[0].uid), { ...taskToUpdate[0] })
+                .then(() => {
+                    tasksDispatch({
+                        type: "UPDATETASK",
+                        payload: {
+                            task: {
+                                ...taskToUpdate,
+                                toUpdate: false
+                            }
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                })
+        }
+        console.log(taskToUpdate)
+        if (taskToUpdate?.length > 0) {
+            database();
+        }
+    }, [taskToUpdate])
 
     useEffect(() => {
         if (localStorage.getItem("todoweb") && !authState) {
