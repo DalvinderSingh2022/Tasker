@@ -18,7 +18,7 @@ import Alert from "./Alert";
 
 const EditTask = ({ proptask, removeContainer }) => {
     const { authState } = useContext(authContext);
-    const { tasksDispatch } = useContext(tasksContext);
+    const { tasksDispatch, setUpdateTask } = useContext(tasksContext);
     const [task, setTask] = useState({ ...proptask });
     const [alert, setAlert] = useState(null);
 
@@ -33,13 +33,9 @@ const EditTask = ({ proptask, removeContainer }) => {
             .then(() => {
                 tasksDispatch({
                     type: dispatchType,
-                    payload: {
-                        task: {
-                            ...task,
-                            toUpdate: true
-                        }
-                    }
+                    payload: { task: { ...params } }
                 });
+                setUpdateTask({ ...params });
                 removeContainer();
             })
             .catch(error => {
@@ -53,13 +49,9 @@ const EditTask = ({ proptask, removeContainer }) => {
             .then(() => {
                 tasksDispatch({
                     type: "DELETETASK",
-                    payload: {
-                        task: {
-                            ...task,
-                            toUpdate: true
-                        }
-                    }
+                    payload: { task }
                 });
+                setUpdateTask({ ...params });
                 removeContainer();
                 setAlert({ message: "Task  deleted successfully", type: 'yellow' });
             })

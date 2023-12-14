@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
     const router = useRouter();
     const [authState, authDispatch] = useReducer(authReducer, initialAuthState);
     const [tasksState, tasksDispatch] = useReducer(tasksReducer, initialTasksState);
-    const [taskToUpdate, setTaskToUpdate] = useState(null)
+    const [updateTask, setUpdateTask] = useState({});
 
     useEffect(() => {
         if (localStorage.getItem("todoweb") && !authState.uid) {
@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }) {
                         payload: {
                             task: {
                                 ...taskData,
-                                uid: taskData.id,
+                                uid: task.id,
                                 status: (new Date(taskData.duedate).getTime() < new Date().getTime()) ? "delay" : taskData.status
                             }
                         }
@@ -51,31 +51,23 @@ function MyApp({ Component, pageProps }) {
     }, [authState]);
 
     useEffect(() => {
-        setTaskToUpdate(tasksState.filter(task => task.toUpdate));
-    }, [tasksState]);
-
-    useEffect(() => {
         async function database() {
-            await setDoc(doc(collection(db, authState.uid), taskToUpdate[0].uid), { ...taskToUpdate[0] })
+            await setDoc(doc(collection(db, authState.uid), updateTask.uid), { ...updateTask })
                 .then(() => {
                     tasksDispatch({
                         type: "UPDATETASK",
-                        payload: {
-                            task: {
-                                ...taskToUpdate,
-                                toUpdate: false
-                            }
-                        }
+                        payload: { task: { ...updateTask } }
                     });
+                    setUpdateTask({});
                 })
                 .catch(error => {
                     console.error(error);
                 })
         }
-        if (taskToUpdate?.length > 0) {
+        if (Object.keys(updateTask).length) {
             database();
         }
-    }, [taskToUpdate])
+    }, [updateTask]);
 
     useEffect(() => {
         if (localStorage.getItem("todoweb") && !authState) {
@@ -84,7 +76,7 @@ function MyApp({ Component, pageProps }) {
     })
 
     return (
-        <tasksContext.Provider value={{ tasksState, tasksDispatch }}>
+        <tasksContext.Provider value={{ tasksState, tasksDispatch, setUpdateTask }}>
             <authContext.Provider value={{ authState, authDispatch }}>
                 <main className={router.pathname.includes("/auth/") ? cssClasses.main : ""}>
                     <Navbar />
