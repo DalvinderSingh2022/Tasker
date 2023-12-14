@@ -3,7 +3,7 @@ import { auth } from "../../firebase";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { authContext } from "@/store/auth";
 
@@ -19,9 +19,11 @@ const login = () => {
         password: null
     });
 
-    if (authState?.isAuthenticated) {
-        router.push("/");
-    }
+    useEffect(() => {
+        if (authState?.isAuthenticated) {
+            router.push("/");
+        }
+    }, [authState])
 
     const handlechange = (e) => {
         const name = e.target.name;
@@ -48,7 +50,6 @@ const login = () => {
                         }
                     });
                     setAlert({ message: 'Logged In successfully, Welcome back ' + userInfo.user.displayName, type: 'blue' });
-                    router.push('/');
                 }).catch(error => {
                     setAlert({ message: error.message, type: 'red' });
                     console.error(error);

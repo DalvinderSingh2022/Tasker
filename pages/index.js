@@ -52,7 +52,7 @@ const index = () => {
         if (!authState?.isAuthenticated) {
             router.push("/auth/signin");
         }
-    })
+    }, [authState]);
 
     return (
         <>
