@@ -66,6 +66,7 @@ section button {
 
 section input {
     width: min(100%, 420px);
+    background-color: var(--white);
 }
 
 button {
@@ -86,7 +87,7 @@ label {
     color: var(--text);
 }
 
-:where(input, textarea, select) {
+:where(input, textarea) {
     border: 1px solid transparent;
     padding: 10px 16px;
     outline: none;
@@ -94,13 +95,14 @@ label {
     font-size: 1em;
     background-color: var(--grey);
     border-radius: 24px;
+    color: var(--text);
 }
 
 textarea {
     border-radius: 16px;
 }
 
-button.round {
+main button.round {
     padding: 0;
     min-width: 40px;
     height: 40px;
@@ -149,18 +151,18 @@ h2 {
 }
 
 .todo,
-button.blue,
+main button.blue,
 .alertBox.blue .line {
     background: var(--blue-grad);
 }
 
 .complete,
-button.green {
+main button.green {
     background: var(--green-grad);
 }
 
 .delay,
-button.red,
+main button.red,
 .alertBox.red .line {
     background: var(--red-grad);
 }
@@ -169,7 +171,7 @@ button.red,
     background: linear-gradient(90deg, rgb(216, 216, 17), rgb(222, 222, 104));
 }
 
-button.menu {
+main button.menu {
     display: none;
 }
 
@@ -186,21 +188,26 @@ button.menu {
 
 .alertBox {
     background-color: var(--white);
-    border-radius: 8px;
+    border-radius: 40px 0 0 40px;
     overflow: hidden;
     position: fixed;
     bottom: 2em;
     z-index: 9999;
+    right: -100%;
+}
+
+.alertBox.active {
+    right: 0;
 }
 
 .alertBox .alert {
-    padding: 8px 18px;
+    padding: 12px 18px;
     color: var(--text);
     border-radius: 12px;
     display: flex;
-    align-items: center;
-    gap: 1em;
+    gap: 8px;
     font-size: 1.1em;
+    line-height: 1em;
 }
 
 .bottomLine {
@@ -215,11 +222,12 @@ button.menu {
     left: 0;
     height: 100%;
     animation: alert 2.5s ease-in-out;
+    border-radius: 20px;
 }
 
 @keyframes alert {
     100% {
-        width: 0;
+        left: 100%;
     }
 }
 
@@ -280,7 +288,7 @@ button.menu {
         padding-right: 65px;
     }
 
-    button.menu {
+    main button.menu {
         display: block;
         font-size: 1.4em;
         position: absolute;

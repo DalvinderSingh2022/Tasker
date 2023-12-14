@@ -8,14 +8,21 @@ const Alert = ({ message, type, setAlert }) => {
     const boxRef = useRef();
 
     useEffect(() => {
-        const timeout = () => setAlert(false);
-        setTimeout(timeout, 2500);
+        const addRemoveClass = () => boxRef?.current?.classList?.toggle("active");
+        const removeAlert = () => setAlert(false);
 
-        return () => clearTimeout(timeout)
-    })
+        setTimeout(addRemoveClass, 100);
+        setTimeout(addRemoveClass, 2300);
+        setTimeout(removeAlert, 2500);
+
+        return () => {
+            clearTimeout(removeAlert);
+            clearTimeout(addRemoveClass);
+        }
+    }, [])
 
     return (
-        <div className={`${"alertBox " + type}`}>
+        <div className={`${"alertBox " + type}`} ref={boxRef}>
             <div className="alert">
                 {type === "blue" ? <MdVerified /> : (type === "red" ? <IoIosAlert /> : <IoIosWarning />)}
                 <span>{message}</span>

@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: column;
     gap: 3em;
-    width: min(100vw, 540px);
+    width: min(calc(100vw - 1em), 540px);
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 
@@ -43,10 +43,10 @@ button.change {
     font-size: .9em;
 }
 
-.form :where(input:not(:disabled), textarea, select) {
+.form :where(input:not(:disabled), textarea) {
     border-bottom-color: var(--primary);
 }
 
-.form :where(input:not(:disabled), textarea, select):focus {
+.form :where(input:not(:disabled), textarea):focus {
     border-bottom-color: var(--secondary);
 }

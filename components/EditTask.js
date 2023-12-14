@@ -8,6 +8,8 @@ import { FaXmark } from "react-icons/fa6";
 import { ImRadioUnchecked } from "react-icons/im";
 import { MdDeleteOutline } from "react-icons/md";
 import { FaRegCheckCircle } from "react-icons/fa";
+import { FaRecycle } from "react-icons/fa6";
+import { LiaTrashRestoreSolid } from "react-icons/lia";
 
 import { authContext } from "@/store/auth";
 import { tasksContext } from "@/store/tasks";
@@ -123,18 +125,19 @@ const EditTask = ({ proptask, removeContainer }) => {
                                     <button className='round long red' onClick={() => {
                                         handler("UPDATETASK", { ...task, isBinned: true });
                                         setAlert({ message: "Task  moved to recycle bin", type: 'yellow' });
-                                    }}><MdDeleteOutline />bin</button>
+                                    }}><FaRecycle />bin</button>
                                 </> :
                                 <>
                                     <button className='round long blue' onClick={() => {
                                         handler("UPDATETASK", { ...task, isBinned: false });
                                         setAlert({ message: "Task removed from recycle bin", type: 'blue' });
-                                    }}><FaRegSave />restore</button>
-                                    <button className='round long red' onClick={handleDelete}><FaRegSave />delete</button>
+                                    }}><LiaTrashRestoreSolid />restore</button>
+
+                                    <button className='round long red' onClick={handleDelete}><MdDeleteOutline />delete</button>
                                 </>
                             }
 
-                            <button className='round long red' onClick={() => removeContainer()}><FaXmark />close</button>
+                            <button className='round long' onClick={() => removeContainer()}><FaXmark />close</button>
                         </div>
                     </div>
                 </div>

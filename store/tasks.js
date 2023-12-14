@@ -5,7 +5,7 @@ export const initialTasksState = [];
 
 export function tasksReducer(state, action) {
     if (action.type === "ADDTASK") {
-        const newState = state?.length ? [...state, { ...action.payload.task }] : [{ ...action.payload.task, }]
+        const newState = state?.length ? [...state, { ...action.payload.task }] : [{ ...action.payload.task }]
         newState.sort((a, b) => (new Date(a.duedate).getTime()) - new Date(b.duedate).getTime());
         return newState;
     }

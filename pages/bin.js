@@ -9,7 +9,7 @@ import { authContext } from "@/store/auth";
 import Alert from "@/components/Alert";
 
 import { LiaTrashRestoreSolid } from "react-icons/lia";
-import { MdDeleteSweep } from "react-icons/md";
+import { CgTrashEmpty } from "react-icons/cg";
 
 import tasksclasses from "../styles/tasks.module.css";
 
@@ -63,7 +63,7 @@ const bin = () => {
             <h1>Recycle Bin</h1>
             <section>
                 <button onClick={handleRestoreAll}><LiaTrashRestoreSolid />Restore all</button>
-                <button onClick={handleEmptyBIn}><MdDeleteSweep />Empty Bin</button>
+                <button onClick={handleEmptyBIn}><CgTrashEmpty />Empty Bin</button>
             </section>
             <div className={tasksclasses.container}>
                 {tasks?.length ? tasks.map(task =>
