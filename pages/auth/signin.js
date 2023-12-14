@@ -41,7 +41,7 @@ const signin = () => {
                 .then(userInfo => {
                     updateProfile(auth.currentUser, { displayName: user.displayName });
                     authDispatch({
-                        type: "signin",
+                        type: "LOGIN",
                         payload: {
                             displayName: userInfo.user.displayName,
                             email: userInfo.user.email,
