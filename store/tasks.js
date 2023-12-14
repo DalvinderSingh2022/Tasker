@@ -11,7 +11,7 @@ export function tasksReducer(state, action) {
     }
 
     if (action.type === "UPDATETASK") {
-        const newState = [...state.filter(task => task.uid !== action.payload.task.uid), action.payload.task];
+        const newState = [...state.filter(task => task.uid !== action.payload.task.uid), { ...action.payload.task }];
         newState.sort((a, b) => (new Date(a.duedate).getTime()) - new Date(b.duedate).getTime());
         return newState;
     }
