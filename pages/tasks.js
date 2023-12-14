@@ -15,7 +15,11 @@ const tasks = () => {
 
     useEffect(() => {
         setTasks(tasksState.filter(task => !task.isBinned));
-    }, [tasksState])
+    }, [tasksState]);
+
+    if (!tasksState) {
+        return <Loading full={true} />
+    }
 
     return (
         <>
@@ -25,16 +29,23 @@ const tasks = () => {
                     type="search"
                     placeholder="search..."
                     value={search}
-                    onChange={(e) => setSearch(e.target.value)}
+                    onChange={(e) => {
+                        setSearch(e.target.value);
+                        if (!e.target.value) {
+                            setTasks(tasksState);
+                        }
+                    }}
                 />
-                <button className="round" onClick={() => setTasks(tasks.filter(task => task.detail.include(search) || task.title.include(search)))}>
+                <button className="round" onClick={() => setTasks(() => {
+                    return tasks.filter(task => task.detail.search(search) > -1 || task.title.search(search) > -1)
+                })}>
                     <FaSearch />
                 </button>
             </section>
             <div className={tasksclasses.container}>
-                {tasks?.length ? tasks.map(task => {
+                {tasks?.length ? tasks.map(task =>
                     <Task {...task} key={task.uid || task.assignTime} />
-                }) : (tasks ? <Loading /> : <div>There is no task</div>)}
+                ) : <div>There is no task</div>}
             </div>
         </>
     )

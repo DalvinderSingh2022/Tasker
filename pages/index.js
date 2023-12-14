@@ -10,7 +10,6 @@ import Task from "@/components/Task";
 
 import tasksclasses from "../styles/tasks.module.css";
 import cssClasses from "../styles/dashboard.module.css";
-import Loading from "@/components/Loading";
 
 const index = () => {
     const router = useRouter();
@@ -69,7 +68,7 @@ const index = () => {
                     <div className={tasksclasses.container}>
                         {section.tasks?.length ?
                             section.tasks.map(task => <Task {...task} key={task.uid || task.assignTime} />) :
-                            (section.tasks ? <Loading /> : <p>No tasks in {section.header}</p>)}
+                            <p>No task due {section.header}</p>}
                     </div>
                 </div>
             ))}

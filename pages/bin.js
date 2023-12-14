@@ -7,7 +7,6 @@ import Task from "@/components/Task";
 import { tasksContext } from "@/store/tasks";
 import { authContext } from "@/store/auth";
 import Alert from "@/components/Alert";
-import Loading from "@/components/Loading";
 
 import { LiaTrashRestoreSolid } from "react-icons/lia";
 import { MdDeleteSweep } from "react-icons/md";
@@ -67,9 +66,9 @@ const bin = () => {
                 <button onClick={handleEmptyBIn}><MdDeleteSweep />Empty Bin</button>
             </section>
             <div className={tasksclasses.container}>
-                {tasks?.length ? tasks.map(task => {
+                {tasks?.length ? tasks.map(task =>
                     <Task {...task} key={task.uid || task.assignTime} />
-                }) : (tasks ? < Loading /> : <div>There is no task</div>)}
+                ) : <div>There is no task</div>}
             </div>
             {alert && <Alert {...alert} setAlert={setAlert} />}
         </>
