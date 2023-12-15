@@ -32,7 +32,7 @@ const tasks = () => {
                     onChange={(e) => {
                         setSearch(e.target.value);
                         if (!e.target.value) {
-                            setTasks(tasksState);
+                            setTasks(tasks);
                         }
                     }}
                 />
