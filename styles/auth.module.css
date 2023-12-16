@@ -43,10 +43,10 @@ button.change {
     font-size: .9em;
 }
 
-.form :where(input:not(:disabled), textarea) {
+.form :where(input:not(:disabled), textarea:not(:disabled)) {
     border-bottom-color: var(--primary);
 }
 
-.form :where(input:not(:disabled), textarea):focus {
+.form :where(input:not(:disabled), textarea:not(:disabled)):focus {
     border-bottom-color: var(--secondary);
 }

@@ -6,10 +6,22 @@
 
 .container .task {
     background-color: var(--white);
-    padding-top: .5em;
     border-radius: 20px;
     max-width: 520px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    box-shadow: rgba(17, 12, 46, 0.1) 0px 48px 100px 0px;
+    animation: fade-up 400ms ease-out forwards;
+}
+
+@keyframes fade-up {
+    from {
+        transform: translateY(12px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .task :where(input, textarea, p) {
@@ -17,7 +29,7 @@
     border: none;
     color: var(--text-sec);
     text-transform: capitalize;
-    padding: 4px 16px;
+    padding: 0 16px;
 }
 
 .task input {
@@ -30,14 +42,15 @@
     position: relative;
 }
 
-.task form button {
-    position: absolute;
-    right: 8px;
-    top: 0;
-}
-
 .task p {
     font-size: .9em;
     padding: 0 0 0 12px;
     margin-bottom: 8px;
+}
+
+.group {
+    justify-content: space-between;
+    padding: 8px 8px 0 0;
+    display: flex;
+    width: 100%;
 }

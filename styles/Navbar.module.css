@@ -5,7 +5,7 @@
     justify-content: space-between;
     padding: 2em 1.4em;
     height: 100vh;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .logo {
@@ -23,11 +23,13 @@
     gap: 0.4em;
     padding: 0.8em 1.2em;
     margin: 0 auto 1em;
-    border-radius: 8px;
+    border-radius: 40px;
     max-width: 240px;
     width: 100%;
     color: var(--text-sec);
     font-size: 1.1em;
+    position: relative;
+    overflow: hidden;
 }
 
 .activelink {
@@ -37,6 +39,7 @@
 
 .logout {
     color: var(--text);
+    background-color: var(--grey);
 }
 
 .link:hover {

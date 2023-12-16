@@ -18,15 +18,13 @@
     --text: #302f35;
     --text-sec: #8a8e96;
 
-    --background: #f0ebf7;
-
     --blue-grad: linear-gradient(90deg, rgb(55 172 255), rgb(95, 211, 237));
     --red-grad: linear-gradient(90deg, rgb(232, 93, 65), rgb(241, 130, 105));
     --green-grad: linear-gradient(90deg, rgb(22, 189, 75), rgb(64, 199, 120));
 }
 
 body {
-    background-color: var(--background);
+    background-color: var(--grey);
 }
 
 main {
@@ -88,7 +86,7 @@ label {
 }
 
 :where(input, textarea) {
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     padding: 10px 16px;
     outline: none;
     resize: none;
@@ -103,6 +101,8 @@ textarea {
 }
 
 main button.round {
+    overflow: hidden;
+    position: relative;
     padding: 0;
     min-width: 40px;
     height: 40px;
@@ -119,6 +119,46 @@ button.round.long {
     width: auto;
     gap: 6px;
     text-transform: capitalize;
+}
+
+nav a:hover svg,
+button.round:hover svg {
+    width: 1.05em;
+    height: 1.05em;
+}
+
+nav a::before,
+button.round:not(.menu)::before {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    transition: 200ms ease-in-out;
+}
+
+button.round:hover::before {
+    height: 100%;
+    width: 100%;
+}
+
+button.round.long::before {
+    left: -24px;
+    height: calc(100% + 24px);
+}
+
+button.round.long:hover::before {
+    width: calc(100% + 24px);
+}
+
+nav a:hover::before {
+    left: -2.4em;
+    height: calc(100% + 1.6em);
+}
+
+nav a:hover:hover::before {
+    width: calc(100% + 2.4em);
 }
 
 h1 {
@@ -290,11 +330,10 @@ main button.menu {
 
     main button.menu {
         display: block;
-        font-size: 1.4em;
+        font-size: 1.5em;
         position: absolute;
         right: calc(1em - 100%);
-        height: 45px;
-        width: 45px;
+        padding-top: 8px;
     }
 
     .open button.menu {

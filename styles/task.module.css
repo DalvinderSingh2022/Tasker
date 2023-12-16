@@ -4,10 +4,19 @@
     border-radius: 20px;
     width: min(calc(100vw - 1em), 620px);
     margin: auto;
+    animation: fade-grow 200ms ease-out forwards;
 }
 
-.container :where(input, textarea) {
-    border: none;
+@keyframes fade-grow {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .group {
