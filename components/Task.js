@@ -15,7 +15,7 @@ const Task = (task) => {
         <>
             <div className={tasksclasses.task}>
                 <form className={authclasses.form}>
-                    <div className={authclasses.group} >
+                    <div className={tasksclasses.group} >
                         <input
                             disabled={true}
                             type="text"
