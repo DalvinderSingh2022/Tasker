@@ -33,12 +33,13 @@ const EditTask = ({ proptask, removeContainer }) => {
     const handler = async (dispatchType, params) => {
         await setDoc(doc(collection(db, authState.uid), params.uid || params.assignTime), { ...params })
             .then(() => {
-                tasksDispatch({
-                    type: dispatchType,
-                    payload: { task: { ...params } }
-                });
-                setUpdateTask({ ...params });
-                removeContainer();
+                setTimeout(() => {
+                    tasksDispatch({
+                        type: dispatchType,
+                        payload: { task: { ...params } }
+                    });
+                    setUpdateTask({ ...params })
+                }, 2400);
             })
             .catch(error => {
                 console.error(error);
@@ -49,12 +50,13 @@ const EditTask = ({ proptask, removeContainer }) => {
     const handleDelete = async () => {
         await deleteDoc(doc(db, authState.uid, task.uid || task.assignTime))
             .then(() => {
-                tasksDispatch({
-                    type: "DELETETASK",
-                    payload: { task }
-                });
-                setUpdateTask({ ...params });
-                removeContainer();
+                setTimeout(() => {
+                    tasksDispatch({
+                        type: "DELETETASK",
+                        payload: { task }
+                    });
+                    setUpdateTask({ ...params });
+                }, 2400);
                 setAlert({ message: "Task  deleted successfully", type: 'yellow' });
             })
             .catch(error => {
