@@ -17,10 +17,6 @@ const tasks = () => {
         setTasks(tasksState.filter(task => !task.isBinned));
     }, [tasksState]);
 
-    if (!tasksState) {
-        return <Loading full={true} />
-    }
-
     return (
         <>
             <h1>Tasks</h1>
@@ -32,12 +28,14 @@ const tasks = () => {
                     onChange={(e) => {
                         setSearch(e.target.value);
                         if (!e.target.value) {
-                            setTasks(tasks);
+                            setTasks(tasksState.filter(task => !task.isBinned));
                         }
                     }}
                 />
                 <button className="round" onClick={() => setTasks(() => {
-                    return tasks.filter(task => task.detail.search(search) > -1 || task.title.search(search) > -1)
+                    return tasksState.filter(task =>
+                        task.detail.toLowerCase().search(search.toLowerCase()) > -1 ||
+                        task.title.toLowerCase().search(search.toLowerCase()) > -1)
                 })}>
                     <FaSearch />
                 </button>
