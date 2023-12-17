@@ -17,6 +17,7 @@ import { tasksContext } from "@/store/tasks";
 import authclasses from "../styles/auth.module.css";
 import taskclasses from "../styles/task.module.css";
 import Alert from "./Alert";
+import Loading from "./Loading";
 
 const EditTask = ({ proptask, removeContainer }) => {
     const { authState } = useContext(authContext);
@@ -38,8 +39,9 @@ const EditTask = ({ proptask, removeContainer }) => {
                         type: dispatchType,
                         payload: { task: { ...params } }
                     });
-                    setUpdateTask({ ...params })
-                }, 2400);
+                    setUpdateTask({ ...params });
+                    removeContainer();
+                }, 2000);
             })
             .catch(error => {
                 console.error(error);
@@ -56,7 +58,8 @@ const EditTask = ({ proptask, removeContainer }) => {
                         payload: { task }
                     });
                     setUpdateTask({ ...params });
-                }, 2400);
+                    removeContainer();
+                }, 2000);
                 setAlert({ message: "Task  deleted successfully", type: 'yellow' });
             })
             .catch(error => {
@@ -144,7 +147,10 @@ const EditTask = ({ proptask, removeContainer }) => {
                     </div>
                 </div>
             </div>
-            {alert && <Alert {...alert} setAlert={setAlert} />}
+            {alert && <>
+                <Alert {...alert} setAlert={setAlert} />
+                <div className="globalBox"><Loading /></div>
+            </>}
         </>
     )
 }
