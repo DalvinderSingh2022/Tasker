@@ -17,6 +17,7 @@ function MyApp({ Component, pageProps }) {
     const [authState, authDispatch] = useReducer(authReducer, initialAuthState);
     const [tasksState, tasksDispatch] = useReducer(tasksReducer, initialTasksState);
     const [updateTask, setUpdateTask] = useState({});
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (localStorage.getItem("todoweb") && !authState.uid) {
@@ -47,6 +48,7 @@ function MyApp({ Component, pageProps }) {
         }
         if (authState.uid) {
             database();
+            setLoading(false);
         }
     }, [authState]);
 
@@ -69,11 +71,9 @@ function MyApp({ Component, pageProps }) {
         }
     }, [updateTask]);
 
-    useEffect(() => {
-        if (localStorage.getItem("todoweb") && !authState) {
-            return <Loading full={true} />
-        }
-    })
+    if (loading) {
+        return <Loading full={true} />
+    }
 
     return (
         <tasksContext.Provider value={{ tasksState, tasksDispatch, setUpdateTask }}>
