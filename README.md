@@ -1,4 +1,4 @@
-# Todo-App
+# Tasker
 Tasker is a simple yet powerful todo application that helps you organize and prioritize your to-do efficiently.
 [live demo](https://todoappds.netlify.app/)
 
@@ -42,7 +42,7 @@ These instructions will help you get a copy of the project up and running on you
 
 ### Installing
 1. Clone the repository to your local machine:
-- ```git clone https://github.com/DalvinderSingh2022/Todo-App.git```
+- ```git clone https://github.com/DalvinderSingh2022/Tasker.git```
   
 2. Navigate to the project directory:
 - ``` cd Todo-App```
