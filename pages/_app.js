@@ -46,10 +46,11 @@ function MyApp({ Component, pageProps }) {
                 });
             }
         }
+        console.log("useEffect")
         if (authState.uid) {
             database();
-            setLoading(false);
         }
+        setLoading(false);
     }, [authState]);
 
     useEffect(() => {

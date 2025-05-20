@@ -34,8 +34,10 @@ const tasks = () => {
                 />
                 <button className="round" onClick={() => setTasks(() => {
                     return tasksState.filter(task =>
-                        task.detail.toLowerCase().search(search.toLowerCase()) > -1 ||
+                        !task.isBinned && 
+                        (task.detail.toLowerCase().search(search.toLowerCase()) > -1 ||
                         task.title.toLowerCase().search(search.toLowerCase()) > -1)
+                    )
                 })}>
                     <FaSearch />
                 </button>
